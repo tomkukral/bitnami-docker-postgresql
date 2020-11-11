@@ -20,6 +20,9 @@ print_welcome_page
 postgresql_enable_nss_wrapper
 
 if [[ "$*" = *"/opt/bitnami/scripts/postgresql/run.sh"* ]]; then
+    info "** Disabling hugepages **"
+    echo "huge_pages = off" > /opt/bitnami/postgresql/conf/conf.d/hugepages.conf
+
     info "** Starting PostgreSQL setup **"
     /opt/bitnami/scripts/postgresql/setup.sh
     touch "$POSTGRESQL_TMP_DIR"/.initialized

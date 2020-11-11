@@ -34,6 +34,9 @@ VOLUME [ "/bitnami/postgresql", "/docker-entrypoint-initdb.d", "/docker-entrypoi
 
 EXPOSE 5432
 
+# disable huge_pages in sample config because this config is used by initdb
+RUN echo "huge_pages = off" >> /opt/bitnami/postgresql/share/postgresql.conf.sample
+
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/postgresql/entrypoint.sh" ]
 CMD [ "/opt/bitnami/scripts/postgresql/run.sh" ]
